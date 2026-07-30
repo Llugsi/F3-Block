@@ -7,7 +7,7 @@ import torch.nn.functional as F
 from skimage.metrics import peak_signal_noise_ratio as psnr
 from skimage.metrics import structural_similarity as ssim
 
-# Script 1
+# [Script 1] 7-layer synthetic stratigraphic and noise simulator
 def seismic_data_generation(t, x, peak_1, peak_2, peak_3, axis, height, traces, m, b, 
                             x_fault=128, throw=0.15): 
     """
