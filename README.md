@@ -127,7 +127,7 @@ The field data used in this study belongs to the Netherlands government (TNO) an
   howpublished = {TerraNubis Open Seismic Repository},
   year         = {2023},
   note         = {Accessed via OpendTect Open Source License Framework. Projected in EPSG:23031 ED50/UTM Zone 31N},
-  url          = {https://terranubis.com}
+  url          = {https://terranubis.com/datainfo/F3-Demo-2023}
 }
 ```
 
