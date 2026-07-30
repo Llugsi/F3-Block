@@ -1,6 +1,4 @@
-# Self-Supervised Suppression of Spatially Coherent Seismic Noise via
-# Directional Anisotropic Causal Networks: Application to the F3
-# Block
+# Self-Supervised Suppression of Spatially Coherent Seismic Noise via Directional Anisotropic Causal Networks: Application to the F3 Block
 
 Official repository containing the source code, network architectures, validation pipelines, and scientific visualization scripts for the methodology presented in our manuscript.
 
@@ -67,7 +65,7 @@ pip install numpy torch matplotlib pandas scipy scikit-image segyio
 
 ---
 
-## Execution Guide for Reviewers
+## 🚀 Execution Guide for Reviewers
 
 To replicate the quantitative tables and high-resolution figures presented in the manuscript, follow these execution steps sequentially:
 
@@ -83,13 +81,19 @@ Compute metrics (MSE, PSNR, SSIM) dynamically against classical F-X Deconvolutio
 python research_core/benchmark_table.py
 ```
 
-### Step 3: Run Industrial Field Data Inferences (Field SEG-Y File)
-Ensure your target production file (`Seismic_data.sgy`) is placed in the root directory. Execute the horizontal validation pipeline to parse the SEG-Y volume, perform strict Z-score normalizations, and deploy parallel network inferences.
+### Step 3: Download & Prepare the Industrial Field Dataset (F3 Block)
+The field validation utilizes the open-access **North Sea F3 Block 3D Seismic Demo Dataset** hosted on the TerraNubis Open Seismic Repository. Originally acquired by GB Earth Sciences (OpendTect project via their TerraNubis portal. Due to size limitations (863 MB), the raw data must be fetched and positioned manually:
+
+1. Access the official portal to download the source compressed volume: [TerraNubis F3-Demo-2023](https://terranubis.com/datainfo/F3-Demo-2023).
+2. Download the compressed file named **`F3_Demo_2023.zip`**.
+3. Extract the contents of the zip file and navigate to the internal **`Rawdata`** folder.
+4. Locate the target SEG-Y file within that directory, rename it strictly to **`Seismic_data.sgy`**, and place it directly into the root directory of this cloned repository.
+5. Run the field inference pipeline. The execution handles structural parsing (`Segyio`), extracts the explicit coordinates subgrid used in our paper (vertical length $Z=462$ samples across $X=256$ traces starting sequentially from index `1000`), and runs parallel baseline benchmarking:
 ```bash
 python research_core/infer_field_segy.py
 ```
 *Expected Outputs:* 
-* `benchmark_metrics.jpg` (High-DPI bar/line trend diagram)
+* `benchmark_metrics.jpg` (High-DPI dual-axis bar/line trend diagram)
 * `ieee_field_validation_4panel.png` (Horizontal cross-validation layout with high-visibility axes font size `18`)
 
 ### Step 4: Recompile Manuscript Schematics
@@ -107,9 +111,25 @@ python figures_generation/fig_regional_macro_map.py
 * **Grid Patch Size:** 64 × 64 pixels extracted stochastically via an online uniform distribution $\mathcal{U}(0, \cdot)$.
 * **Training Volume:** 1,200 training patches / 300 validation patches per epoch (independent geological setups to avoid overfitting).
 * **Optimization Framework:** Adam Optimizer (Learning Rate = 0.001), backed by `torch.backends.cudnn.benchmark = True`.
-* **Real Seismic Dimensions:** Natively reads and processes blocks of 462 samples × 256 traces directly via direct GPU memory tensor allocation.
+* **Real Seismic Extraction:** Targeted profile bounds natively scale to $Z=462$ vertical time samples and $X=256$ horizontal spatial traces directly via direct GPU memory tensor allocation.
 
 ---
+
+## 📜 Data Attribution & Citation
+
+The field data used in this study belongs to the Netherlands government (TNO) and dGB Earth Sciences, distributed open-source via the TerraNubis repository. If you find this research or code useful for your work, please cite both our official paper and the underlying seismic database:
+
+### Seismic Dataset Reference
+```bibtex
+@misc{ref_dgb_f3,
+  author       = {{dGB Earth Sciences}},
+  title        = {The Netherlands F3 Block 3D Seismic Demo Dataset},
+  howpublished = {TerraNubis Open Seismic Repository},
+  year         = {2023},
+  note         = {Accessed via OpendTect Open Source License Framework. Projected in EPSG:23031 ED50/UTM Zone 31N},
+  url          = {https://terranubis.com}
+}
+```
 
 ## 📜 Citation & Contacts
 
