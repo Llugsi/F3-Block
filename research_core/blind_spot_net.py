@@ -14,6 +14,8 @@
 # leakage and forcing the optimization loop to converge solely toward the geological structural coherence 
 # of subsurface reflectors under the self-supervised Noise2Noise paradigm.
 # ===================================================================================================
+
+# [Script 3] Pure Causal Conv2D operators and BlindSpotNet architecture
 class TNNLS_CausalConv2d(nn.Module):
     """
     Pure Directional Causal Convolutional Operator.
