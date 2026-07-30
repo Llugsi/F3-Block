@@ -1,4 +1,4 @@
-# Script 2
+# [Script 2 & 4] Coordinated DoggerlandN2NDataset loader (with GT/Noise support)
 class DoggerlandN2NDataset(Dataset):
     
     # Constructor that receives both noisy images, patch size, and the number of patches per epoch
