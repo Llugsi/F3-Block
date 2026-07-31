@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import numpy as np
 
-# High-density layout configuration for IEEE double-column template compatibility
+# High-density layout configuration for double-column template compatibility
 plt.rcParams['font.family'] = 'sans-serif'
 fig, ax = plt.subplots(figsize=(12, 6.5), dpi=300) 
 
@@ -70,4 +70,4 @@ ax.axis('off')
 plt.tight_layout()
 plt.savefig('seismic_patch_extraction.png', bbox_inches='tight', dpi=300)
 plt.show()
-print("✅ High-visibility patch extraction diagram compiled and saved as 'seismic_patch_extraction.png'.")
+print("High-visibility patch extraction diagram compiled and saved as 'seismic_patch_extraction.png'.")
