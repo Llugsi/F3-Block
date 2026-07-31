@@ -23,7 +23,7 @@ with torch.no_grad():
 denoised_data = reconstructed_tensor.squeeze().cpu().numpy()
 
 # =====================================================================
-# 3. QUANTITATIVE PERFORMANCE SUMMARY (IEEE STANDARDS)
+# 3. QUANTITATIVE PERFORMANCE SUMMARY
 # =====================================================================
 data_range = clean_global.max() - clean_global.min()
 
@@ -37,7 +37,7 @@ psnr_clean = psnr(clean_global, denoised_data, data_range=data_range)
 ssim_noisy = ssim(clean_global, n1_global, data_range=data_range)
 ssim_clean = ssim(clean_global, denoised_data, data_range=data_range)
 
-print(f"📊 --- GLOBAL QUANTITATIVE EVALUATION REPORT: 7-LAYER PROFILE (IEEE TNNLS) ---")
+print(f"--- GLOBAL QUANTITATIVE EVALUATION REPORT: 7-LAYER PROFILE (IEEE TNNLS) ---")
 print(f"   [MSE Metric] Initial: {mse_noisy:.4f}  -->  Final: {mse_clean:.4f}  (Improvement: {mse_improvement:.2f}%)")
 print(f"   [PSNR Metric] Initial: {psnr_noisy:.2f} dB -->  Final: {psnr_clean:.2f} dB (Net Gain: +{psnr_clean - psnr_noisy:.2f} dB)")
 print(f"   [SSIM Metric] Initial: {ssim_noisy:.4f}  -->  Final: {ssim_clean:.4f}  (Net Gain: +{ssim_clean - ssim_noisy:.4f})")
