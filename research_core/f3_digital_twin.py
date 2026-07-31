@@ -3,7 +3,7 @@ def importar_seccion_real_f3_doggerland(num_traces=256, num_samples=512, seed=42
     """
     Generates a high-fidelity digital twin profile of the North Sea F3 Block (Doggerland).
     Models discontinuous reflectors, shear fault geometry, and mud stochastic noise signatures.
-    [IEEE COMPLIANT]: Ensures 2D spatial independent filtering to adhere to the Blind-Spot Theorem.
+    Ensures 2D spatial independent filtering to adhere to the Blind-Spot Theorem.
     """
     np.random.seed(seed)
     
@@ -47,7 +47,7 @@ def importar_seccion_real_f3_doggerland(num_traces=256, num_samples=512, seed=42
 # Digital Twin simulation deployment
 f3_input, f3_target_n2n, f3_ground_truth = importar_seccion_real_f3_doggerland()
 
-print("📊 North Sea F3 Block Digital Twin generated successfully (IEEE Compliant):")
+print("North Sea F3 Block Digital Twin generated successfully:")
 print(f"   - Input Field Matrix (f3_input): {f3_input.shape} | Type: {f3_input.dtype}")
 print(f"   - Target Field Matrix (f3_target_n2n): {f3_target_n2n.shape} | Type: {f3_target_n2n.dtype}")
 
