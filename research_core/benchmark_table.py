@@ -27,7 +27,7 @@ def generar_tabla_comparativa_ieee_dinamica(f3_ground_truth, f3_input, f3_denois
         "Raw Profile (Corrupted)": f3_input,
         "F-X Filter (Classical Geophysics)": fx_output,
         "Standard Baseline UNet (AI Base)": unet_output,
-        "Proposed Framework (TNNLS-BSN)": f3_denoised  
+        "Proposed Framework (BSN)": f3_denoised  
     }
     
     data_report = []
