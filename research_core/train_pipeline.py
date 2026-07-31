@@ -81,7 +81,7 @@ train_loss_history = []
 val_loss_history = []
 val_psnr_history = []  
 
-print(f"🚀 Starting Self-Supervised Noise2Noise training loop on {device}...")
+print(f"Starting Self-Supervised Noise2Noise training loop on {device}...")
 
 # =====================================================================
 # 3. TRAINING AND VALIDATION EXECUTION LOOP
@@ -104,7 +104,7 @@ for epoch in range(epochs):
     epoch_train_loss = running_train_loss / len(train_loader)
     train_loss_history.append(epoch_train_loss)
     
-    # --- VALIDATION PHASE WITH JOINT PSNR EVALUATION (IEEE Requirement) ---
+    # --- VALIDATION PHASE WITH JOINT PSNR EVALUATION ---
     model.eval()
     running_val_loss = 0.0
     running_val_psnr = 0.0
@@ -129,7 +129,7 @@ for epoch in range(epochs):
     
     print(f"Epoch [{epoch+1}/{epochs}] | Train Loss: {epoch_train_loss:.6f} | Val Loss: {epoch_val_loss:.6f} | Real Val PSNR: {epoch_val_psnr:.2f} dB")
 
-print("✅ Training and validation workflows successfully completed.")
+print("Training and validation workflows successfully completed.")
 
 # =====================================================================
 # 4. SCIENTIFIC VISUALIZATION CODES (DUAL AXIS LOSS & PSNR TRENDS)
@@ -155,6 +155,6 @@ lines = line1 + line2 + line3
 labels = [l.get_label() for l in lines]
 ax1.legend(lines, labels, loc='center right')
 
-plt.title("Learning Curves and Seismic Reconstruction Trends (IEEE TNNLS)", fontsize=12, fontweight='bold')
+plt.title("Learning Curves and Seismic Reconstruction Trends", fontsize=12, fontweight='bold')
 fig.tight_layout()
 plt.show()
