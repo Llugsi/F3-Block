@@ -12,7 +12,7 @@ methods = [
 psnr_values = [14.31, 17.54, 32.81, 16.22]
 ssim_values = [0.0525, 0.1634, 0.8166, 0.0804]
 
-# Canvas optimization setup for IEEE double-column grid layout
+# Canvas optimization setup for double-column grid layout
 fig, ax1 = plt.subplots(figsize=(10, 6.5), dpi=300)
 
 # --- LEFT AXIS CONFIGURATION: PSNR (High-Density Bar Layout) ---
@@ -61,4 +61,4 @@ fig.tight_layout()
 # Save into format matching your LaTeX figure handle 'fig:benchmark_metrics'
 plt.savefig('benchmark_metrics.jpg', bbox_inches='tight', dpi=300)
 plt.show()
-print("✅ Quantitative trend figure compiled and saved as 'benchmark_metrics.jpg'.")
+print("Quantitative trend figure compiled and saved as 'benchmark_metrics.jpg'.")
