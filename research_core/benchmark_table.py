@@ -41,16 +41,16 @@ def generar_tabla_comparativa_ieee_dinamica(f3_ground_truth, f3_input, f3_denois
         
         data_report.append({
             "Processing Method": name,
-            "MSE (⬇️)": round(mse_val, 5),
+            "MSE ": round(mse_val, 5),
             "MSE Improv. (%)": f"{mse_improv:.2f}%" if name != "Raw Profile (Corrupted)" else "---",
-            "PSNR dB (⬆️)": round(psnr_val, 2),
-            "SSIM (⬆️)": round(ssim_val, 4)
+            "PSNR dB ": round(psnr_val, 2),
+            "SSIM ": round(ssim_val, 4)
         })
         
     df_results = pd.DataFrame(data_report)
     
     print("\n" + "="*85)
-    print("📈 DYNAMIC BENCHMARK SUMMARY TABLE: NORTH SEA F3 DIGITAL TWIN")
+    print("DYNAMIC BENCHMARK SUMMARY TABLE: NORTH SEA F3 DIGITAL TWIN")
     print("="*85)
     print(df_results.to_string(index=False))
     print("="*85 + "\n")
