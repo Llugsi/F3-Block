@@ -2,16 +2,16 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-# 1. Configurar figura de alta resolución para 1 columna IEEE (Ancho: 3.5 pulgadas)
+# 1. Configure high-resolution plot for IEEE single-column layouts (Width: 3.5 inches)
 fig, ax = plt.subplots(figsize=(3.5, 3.5), dpi=300)
 
-# Ventana geográfica precisa sobre el Mar del Norte con márgenes limpios
+# Precise North Sea geographic window with optimized margins
 lon_min, lon_max = -5.0, 11.0
 lat_min, lat_max = 49.0, 62.0
 ax.set_xlim(lon_min, lon_max)
 ax.set_ylim(lat_min, lat_max)
 
-# 2. BANCOS DE DATOS GEOGRÁFICOS BASE (Offline)
+# 2. GEOGRAPHIC BASELINE REPOSITORIES (Offline boundary coordinates)
 raw_continental = [
     [-5.0, 48.0], [-4.8, 48.3], [-4.4, 48.5], [-3.8, 48.2], [-3.0, 48.6], [-2.5, 48.6], [-1.8, 48.8],
     [-1.6, 49.3], [-1.0, 49.4], [-0.5, 49.3], [0.1, 49.5], [0.7, 49.4], [1.3, 50.1], [1.6, 50.3],
@@ -54,7 +54,7 @@ raw_norway = [
     [12.8, 55.7], [13.0, 55.4], [13.5, 55.3], [14.0, 55.2], [14.0, 62.0], [5.0, 62.0]
 ]
 
-# 3. ALGORITMO DE SÚPER-MUESTREO Y SUAVIZADO POR INTERPOLACIÓN LINEAL DENSA
+# 3. POLYGON SUPERSAMPLING AND LINEAR INTERPOLATION SMOOTHING ALGORITHM
 def supersample_polygon(poly, factor=6):
     poly = np.array(poly)
     x, y = poly[:, 0], poly[:, 1]
@@ -68,23 +68,23 @@ def supersample_polygon(poly, factor=6):
     new_y.append(y[-1])
     return np.column_stack((new_x, new_y))
 
-# Generación automática de miles de nodos geográficos ultra-suaves
+# Automatic generation of high-density, smooth cartographic vertices
 continental_ultra = supersample_polygon(raw_continental, factor=6)
 uk_ultra = supersample_polygon(raw_uk, factor=6)
 norway_ultra = supersample_polygon(raw_norway, factor=6)
 
-# Renderizar polígonos rellenos sólidos sin aristas poligonales rígidas
+# Render solid filled polygons eliminating rigid edge boundaries
 ax.fill(continental_ultra[:, 0], continental_ultra[:, 1], facecolor='#f5f6fa', edgecolor='#bdc3c7', linewidth=0.4, zorder=1)
 ax.fill(uk_ultra[:, 0], uk_ultra[:, 1], facecolor='#f5f6fa', edgecolor='#bdc3c7', linewidth=0.4, zorder=1)
 ax.fill(norway_ultra[:, 0], norway_ultra[:, 1], facecolor='#f5f6fa', edgecolor='#bdc3c7', linewidth=0.4, zorder=1)
 
-# Textos de rotulación cartográfica institucional
+# Cartographic nomenclature labeling
 ax.text(-2.5, 53.5, 'United\nKingdom', color='#7f8c8d', fontsize=8, ha='center', va='center', style='italic')
 ax.text(7.5, 51.5, 'Continental\nEurope', color='#7f8c8d', fontsize=8, ha='center', va='center', style='italic')
 ax.text(8.5, 60.5, 'Norway', color='#7f8c8d', fontsize=8, ha='center', va='center', style='italic')
 ax.text(0.0, 57.5, 'North Sea', color='#2980b9', fontsize=10, weight='bold', ha='center', va='center')
 
-# 4. MALLA DE COBERTURA CRUZADA FINÍSIMA (Decoupled tracking stripes)
+# 4. HIGH-DENSITY MESH OVERLAY (Decoupled tracking stripes)
 grid_space = np.linspace(lon_min - 10, lon_max + 10, 42)
 for g in grid_space:
     t = np.linspace(0, 1, 100)
@@ -98,7 +98,7 @@ for g in grid_space:
     ax.plot(x_cr[mask_cr], y_in[mask_cr], color='#3b5998', linewidth=0.3, alpha=0.28, zorder=2)
 
 # ==========================================
-# 4.5. NUEVO: MALLA BASE REGIONAL (2°-8°E, 52°-57°N)
+# 4.5. SURVEY GEOMETRY: REGIONAL ASSET GRID MASK (2°-8°E, 52°-57°N)
 # ==========================================
 grid_box = plt.Rectangle((2.0, 52.0), 6.0, 5.0, 
                          edgecolor='#7f8c8d', facecolor='none', linewidth=1.0, linestyle='--', zorder=5)
@@ -106,7 +106,7 @@ ax.add_patch(grid_box)
 ax.text(2.2, 52.3, 'F3 Asset Grid', color='#535c68', fontsize=7, weight='bold', ha='left', va='bottom')
 
 # ==========================================
-# 5. RECUADRO DE ENFOQUE: Ubicación exacta del Bloque F3 (Coordenadas Reales)
+# 5. FOCUS AREA BBOX: Localized F3 Block Target (Geodetic Coordinates)
 # ==========================================
 lon_f3_min, lat_f3_min = 4.64, 54.81  
 box_w, box_h = 0.25, 0.15  
@@ -115,20 +115,20 @@ study_box = plt.Rectangle((lon_f3_min, lat_f3_min), box_w, box_h,
                           edgecolor='#c0392b', facecolor='none', linewidth=1.5, zorder=10)
 ax.add_patch(study_box)
 
-# Etiqueta posicionada a la derecha del recuadro para máxima legibilidad
+# Bounding descriptor positioned to the right for maximum tracking scannability
 ax.text(lon_f3_min + 0.5, lat_f3_min, 'F3 Block\nTarget', 
         color='#c0392b', fontsize=8, weight='bold', va='center', ha='left')
 
-# 6. CONFIGURACIÓN FORMAL DE EJES CARTOGRÁFICOS (IEEE Standards)
+# 6. GEODETIC AXES FORMATTING 
 ax.set_xticks([-4, 0, 4, 8, 12])
 ax.set_yticks(range(50, 63, 2))
 ax.set_xticklabels([r'$4^\circ\mathrm{W}$', r'$0^\circ$', r'$4^\circ\mathrm{E}$', r'$8^\circ\mathrm{E}$', r'$12^\circ\mathrm{E}$'], fontsize=8)
 ax.set_yticklabels([r'$50^\circ\mathrm{N}$', r'$52^\circ\mathrm{N}$', r'$54^\circ\mathrm{N}$', r'$56^\circ\mathrm{N}$', r'$58^\circ\mathrm{N}$', r'$60^\circ\mathrm{N}$', r'$62^\circ\mathrm{N}$'], fontsize=8)
 
-# Estilo de grilla sutil de fondo
+# Subtle background grid configuration
 ax.grid(True, linestyle=':', alpha=0.5, color='#bdc3c7')
 ax.tick_params(axis='both', which='major', labelsize=8)
 
-# Guardar la imagen limpia optimizada para LaTeX
+# Save publication-ready layout optimized for LaTeX injection
 plt.savefig('ieee_regional_f3_perfect.png', format='png', bbox_inches='tight', transparent=True)
 plt.show()
