@@ -2,11 +2,11 @@
 import segyio
 def inferencia_seccion_real_f3_pura(ruta_segy, num_samples=462, num_traces=256, skip_traces=1000):
     """
-    IEEE TGRS Inherent Field Data Inference Engine (Zero Numerical Distortions).
+    Inherent Field Data Inference Engine (Zero Numerical Distortions).
     Parses native 462 samples directly from industrial storage file handles
     and deploys optimized GPU-parallel convolutional routines.
     """
-    print(f"⏳ Extracting real production data via sequential volume streaming: {ruta_segy}")
+    print(f"Extracting real production data via sequential volume streaming: {ruta_segy}")
     trace_buffer = []
     
     with segyio.open(ruta_segy, "r", ignore_geometry=True) as segy_file:
@@ -113,7 +113,7 @@ class BaselineUNet(torch.nn.Module):
 # 2. INTEGRATED HORIZONTAL PIPELINE SYSTEM
 # =====================================================================
 def pipeline_comparativo_campo_real_horizontal(ruta_segy, num_samples=462, num_traces=256, skip_traces=1000):
-    print(f"⏳ Opening corporate seismic volume NAM via sequential reading: {ruta_segy}")
+    print(f"Opening corporate seismic volume NAM via sequential reading: {ruta_segy}")
     trace_buffer = []
     
     with segyio.open(ruta_segy, "r", ignore_geometry=True) as segy_file:
@@ -197,7 +197,7 @@ def pipeline_comparativo_campo_real_horizontal(ruta_segy, num_samples=462, num_t
     
     plt.savefig('ieee_field_validation_4panel.png', bbox_inches='tight', dpi=300)
     plt.show()
-    print("✅ Figure successfully saved as 'ieee_field_validation_4panel.png' with optimized tick labels.")
+    print("Figure successfully saved as 'ieee_field_validation_4panel.png' with optimized tick labels.")
 
 if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
